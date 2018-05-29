@@ -10,8 +10,8 @@ node {
 	
     }
 	stage('BUILDING Docker image') {
-	sh "docker rm -f myweb" 
-    sh "docker rmi -f sureshbabu/myweb:0.0.1"
+	// sh "docker rm -f myweb" 
+    // sh "docker rmi -f sureshbabu/myweb:0.0.1"
     sh "docker build -t sureshkanna/myweb:0.0.1 ."          
     }
     stage('PUSH TO DOCKER HUB') {
