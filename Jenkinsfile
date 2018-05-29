@@ -29,3 +29,4 @@ node {
      sh "ssh -o StrictHostKeyChecking=no ec2-user@18.188.112.86 sudo ${dockerRun}"
      }
    }
+}
