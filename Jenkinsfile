@@ -24,11 +24,11 @@ node {
     sh "docker run -d -p 90:80 --name myweb sureshkanna/myweb:0.0.1"          
     }
 	 stage('Run Container on Dev Server'){
-    sh "docker rm -f myweb" 
-    sh "docker rmi -f sureshbabu/myweb:0.0.1"
      def dockerRun = 'docker run -d -p 90:80 --name myweb sureshkanna/myweb:0.0.1'
      sshagent(['ansiblepem']) {
-     sh "ssh -o StrictHostKeyChecking=no ec2-user@18.188.112.86 sudo ${dockerRun}"
+    sh "ssh -o StrictHostKeyChecking=no ec2-user@18.188.112.86 docker rm -f myweb" 
+    sh "ssh -o StrictHostKeyChecking=no ec2-user@18.188.112.86 docker rmi -f sureshbabu/myweb:0.0.1"
+     sh "ssh -o StrictHostKeyChecking=no ec2-user@18.188.112.86 ${dockerRun}"
      }
    }
 }
