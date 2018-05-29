@@ -11,8 +11,8 @@ node {
     }
 	stage('BUILDING Docker image') {
 	sh "docker rm -f myweb" 
-    sh "docker rmi -f sureshbabu/myweb:0.0.1"
-    sh "docker build -t sureshkanna/myweb:0.0.1 ."          
+    // sh "docker rmi -f sureshbabu/myweb:0.0.1"
+    // sh "docker build -t sureshkanna/myweb:0.0.1 ."          
     }
     stage('PUSH TO DOCKER HUB') {
     //withCredentials([string(credentialsId: 'docker-pwd', variable: 'docker-pwd')]) {
@@ -24,8 +24,8 @@ node {
     sh "docker run -d -p 90:80 --name myweb sureshkanna/myweb:0.0.1"          
     }
 	 stage('Run Container on Dev Server'){
-    sh "sudo docker rm -f myweb" 
-    sh "sudo docker rmi -f sureshbabu/myweb:0.0.1"
+    // sh "sudo docker rm -f myweb" 
+    // sh "sudo docker rmi -f sureshbabu/myweb:0.0.1"
      def dockerRun = 'docker run -d -p 90:80 --name myweb sureshkanna/myweb:0.0.1'
      sshagent(['ansiblepem']) {
      sh "ssh -o StrictHostKeyChecking=no ec2-user@18.188.112.86 sudo ${dockerRun}"
